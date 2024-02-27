@@ -2,7 +2,6 @@
 
 # variables, please customize
 
-
 echo ".....Let's Install Lamp Stack (Apache, MySql and PHP)....."
 
 echo "Installing in progress step 1 of 4"
@@ -43,6 +42,10 @@ clear
 # xdg-open "http://localhost"
 # xdg-open "http://localhost/info.php"
 # clear
+
+echo "Installing in progress step 5 of --"
+echo "Installing phpmyadmin"
+sudo apt install -y phpmyadmin php-mbstring php-zip php-gd php-json php-curl
 
 echo "All Done"	
 echo "You can secure your mysql by entering following command"

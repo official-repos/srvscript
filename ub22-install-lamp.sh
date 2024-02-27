@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# variables
+# variables, please customize
 
 
 echo ".....Let's Install Lamp Stack (Apache, MySql and PHP)....."

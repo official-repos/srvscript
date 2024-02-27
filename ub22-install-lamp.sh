@@ -15,6 +15,8 @@ clear
 echo "Adjusting Firewall"
 sudo ufw allow in "Apache Full"
 sudo ufw reload
+echo "Enabling SSL"
+sudo a2enmod ssl
 clear
 echo "Allowing apache to start on boot up"
 # Allow to run Apache on boot up

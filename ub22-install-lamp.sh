@@ -50,6 +50,10 @@ echo "Installing in progress step 5 of --"
 echo "Installing phpmyadmin"
 sudo apt install -y phpmyadmin php-mbstring php-zip php-gd php-json php-curl
 
+clear
+echo "Restarting apache2 ..."
+sudo systemctl restart apache2
+
 echo "All Done"	
 echo "You can secure your mysql by entering following command"
 echo "sudo mysql_secure_installation"

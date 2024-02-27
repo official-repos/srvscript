@@ -17,6 +17,7 @@ sudo ufw allow in "Apache Full"
 sudo ufw reload
 echo "Enabling SSL"
 sudo a2enmod ssl
+sudo a2ensite default-ssl.conf
 clear
 echo "Allowing apache to start on boot up"
 # Allow to run Apache on boot up

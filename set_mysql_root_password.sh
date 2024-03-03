@@ -37,6 +37,7 @@ fi
 
 mysql -u root << EOF
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$NEWPWD';
+FLUSH PRIVILEGES;
 EOF
 if [ $? -eq 0 ]; then
     echo "MySQL root password changed successfully."

@@ -33,7 +33,11 @@ echo "<IfModule mod_remoteip.c>
     RemoteIPHeader X-Forwarded-For
 </IfModule>" | sudo tee /etc/apache2/conf-available/remoteip.conf
 
-sudo ln -s /etc/apache2/conf-available/remoteip.conf /etc/apache2/conf-enabled/remoteip.conf
+# Enable remoteip configuration
+sudo a2enconf remoteip
+
+# Enable SSL configuration
+sudo a2ensite default-ssl
 
 # Restart Apache to apply changes
 sudo systemctl restart apache2

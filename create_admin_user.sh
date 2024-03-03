@@ -16,7 +16,7 @@ if id "$username" &>/dev/null; then
 fi
 
 # Create the user
-useradd -m "$username"
+useradd -m "$username" --shell "/bin/bash"
 
 # Prompt for password
 read -sp "Enter password: " password

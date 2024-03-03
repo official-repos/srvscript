@@ -1,39 +1,21 @@
 #!/bin/bash
 
-# Update package lists
+# Update apt package index
 sudo apt update
 
-# Install Apache
-sudo apt install apache2 -y
-
-# Install MySQL
-sudo apt install mysql-server -y
-
-# Install PHP and required modules
-sudo apt install php libapache2-mod-php php-mysql php-cli php-curl php-gd php-json php-mbstring php-xml php-zip -y
+# Install Apache, MySQL, PHP, and other required packages
+sudo apt install -y apache2 mysql-server php libapache2-mod-php php-mysql phpmyadmin
 
 # Enable Apache modules
-sudo a2enmod rewrite
-sudo a2enmod remoteip
+sudo a2enmod ssl rewrite remoteip
 
-# Restart Apache
-sudo systemctl restart apache2
-
-# Install phpMyAdmin
-sudo apt install phpmyadmin -y
-
-# Configure phpMyAdmin with Apache
-sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
-sudo a2enconf phpmyadmin.conf
-sudo systemctl reload apache2
-
-# Enable mod_remoteip
-echo "<IfModule mod_remoteip.c>
-    RemoteIPHeader X-Forwarded-For
-</IfModule>" | sudo tee /etc/apache2/conf-available/remoteip.conf
+# Enable SSL configuration
+sudo a2ensite default-ssl
 
 # Restart Apache to apply changes
 sudo systemctl restart apache2
 
-echo "LAMP stack, phpMyAdmin, mod_rewrite, and mod_remoteip installed successfully!"
+# Secure MySQL installation
+sudo mysql_secure_installation
 
+echo "LAMP stack, phpMyAdmin, and required Apache modules installed successfully."

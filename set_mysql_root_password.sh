@@ -21,3 +21,21 @@ elif [[ $mysql_status == *"MySQL is running with an empty root password."* ]]; t
 else
     echo "An error occurred while checking MySQL root password status."
 fi
+
+echo "Since mysql root password is empty, let set the password now."
+
+echo "Please enter new password:"
+read NEWPWD
+
+# Check if input is empty
+if [ -z "$NEWPWD" ]; then
+    echo "No password entered. Exiting."
+    exit 1
+fi
+
+mysqladmin -uroot -p password "$NEWPWD"
+
+# Your script logic here
+echo "Your input is: $NEWPWD"
+
+

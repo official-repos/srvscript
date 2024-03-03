@@ -1,5 +1,6 @@
 #!/bin/bash
 
+clear
 #git pull
 
 echo -n "Enter FQDN: "
@@ -7,11 +8,23 @@ read FQDN
 
 # Check if input is empty
 if [ -z "${FQDN}" ]; then
-    echo "Input is empty. Exiting."
+    echo "No FQDN entered, Exiting..."
+    exit 1
+fi
+
+# Prompt the user for the username to check
+read -p "Enter username to check: " username
+
+# Check if the user exists
+if id "$username" &>/dev/null; then
+    echo "User '$username' exists."
+else
+    echo "User '$username' does not exist."
     exit 1
 fi
 
 echo "Processing virtual host..."
+
 
 VDIRCFG=/etc/apache2/sites-available/${FQDN}.conf
 sudo cp ./files/vhost-template.conf ${VDIRCFG}
@@ -23,6 +36,7 @@ if [ ! -d "$VDIR" ]; then
     # If it doesn't exist, create it
     sudo mkdir -p "$VDIR/html"
     echo "<?php phpinfo(); ?>" | sudo tee ${VDIR}/html/test-phpinfo.php
+    sudo chown ${username}.${username} ${VDIR}/html -R
     echo "Directory created: $VDIR"
 else
     echo "Directory already exists: $VDIR"

@@ -35,7 +35,14 @@ if [ -z "$NEWPWD" ]; then
     exit 1
 fi
 
-mysqladmin -uroot -p password "$NEWPWD"
+mysql -u root << EOF
+ALTER USER 'root'@'localhost' IDENTIFIED BY '$NEWPWD';
+EOF
+if [ $? -eq 0 ]; then
+    echo "MySQL root password changed successfully."
+else
+    echo "Failed to change MySQL root password."
+fi
 
 # Your script logic here
 echo "Your input is: $NEWPWD"

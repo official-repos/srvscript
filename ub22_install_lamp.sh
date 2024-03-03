@@ -63,6 +63,10 @@ sudo ufw allow in "Apache Full"
 sudo ufw reload
 echo "Enabling SSL"
 
+# Enable password authentication in SSH configuration
+sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+sudo systemctl restart sshd
+
 echo "LAMP stack, phpMyAdmin, mod_rewrite, and mod_remoteip installed successfully!"
 
 

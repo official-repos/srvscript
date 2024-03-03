@@ -23,7 +23,7 @@ sudo systemctl restart apache2
 # Install phpMyAdmin
 sudo apt install phpmyadmin -y
 
-# Configure phpMyAdmin with Apache
+# Configure phpMyAdmin with Apache. Actually these commands already done by phpmyadmin installation script
 #sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
 #sudo a2enconf phpmyadmin.conf
 #sudo systemctl reload apache2
@@ -41,6 +41,9 @@ sudo a2ensite default-ssl
 
 # Allow Read/Write for Owner
 sudo chmod -R 0755 /var/www/html/
+
+# Create phpinfo
+echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/test.php
 
 # Restart Apache to apply changes
 sudo systemctl restart apache2

@@ -43,7 +43,7 @@ sudo a2ensite default-ssl
 sudo chmod -R 0755 /var/www/html/
 
 # Create phpinfo
-echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/test.php
+echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/test-phpinfo.php
 
 # Restart Apache to apply changes
 sudo systemctl restart apache2

@@ -45,6 +45,6 @@ else
 fi
 
 # Your script logic here
-echo "Your input is: $NEWPWD"
+echo "Your mysql new password is: $NEWPWD"
 
 

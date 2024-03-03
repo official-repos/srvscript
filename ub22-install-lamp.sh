@@ -39,7 +39,18 @@ sudo a2enconf remoteip
 # Enable SSL configuration
 sudo a2ensite default-ssl
 
+# Allow Read/Write for Owner
+sudo chmod -R 0755 /var/www/html/
+
 # Restart Apache to apply changes
 sudo systemctl restart apache2
 
+# Configure firewall
+echo "Adjusting Firewall"
+sudo ufw allow in "Apache Full"
+sudo ufw reload
+echo "Enabling SSL"
+
 echo "LAMP stack, phpMyAdmin, mod_rewrite, and mod_remoteip installed successfully!"
+
+

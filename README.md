@@ -2,7 +2,7 @@
 Bash automation to make easy installation of LAMP stack (Linux Apache Mysql and Phpmyadmin)
 
 # How-To
-cd /tmp
+cd /tmp \
 git clone https://github.com/official-repos/srvscript \
 cd srvscript \
 sudo ./ub22_install_lamp.sh \

@@ -28,6 +28,15 @@ sudo apt install phpmyadmin -y
 #sudo a2enconf phpmyadmin.conf
 #sudo systemctl reload apache2
 
+# Define the old and new URI
+old_uri="phpmyadmin"
+new_uri="newname"
+dttm=$(date '+%Y%m%d%H%M%S')
+# Backup the original configuration files
+sudo cp /etc/phpmyadmin/apache.conf /etc/phpmyadmin/apache.conf.backup-${dttm}
+# Modify the configuration files
+sudo sed -i "s|Alias /$old_uri /usr/share/phpmyadmin|Alias /$new_uri /usr/share/phpmyadmin|g" /etc/phpmyadmin/apache.conf
+
 # Enable mod_remoteip
 echo "<IfModule mod_remoteip.c>
     RemoteIPHeader X-Forwarded-For

@@ -34,4 +34,6 @@ ls -l /var/www/
 sudo a2ensite ${FQDN}
 sudo systemctl restart apache2
 
+echo "New vhost ${FQDN} created successfully!"
+echo "Apache2 restarted ..... ok!"
 

@@ -30,7 +30,7 @@ sudo apt install phpmyadmin -y
 
 # Define the old and new URI
 old_uri="phpmyadmin"
-new_uri="newname"
+new_uri="db/php-myadmin"
 dttm=$(date '+%Y%m%d%H%M%S')
 # Backup the original configuration files
 sudo cp /etc/phpmyadmin/apache.conf /etc/phpmyadmin/apache.conf.backup-${dttm}

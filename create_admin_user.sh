@@ -16,7 +16,9 @@ if id "$username" &>/dev/null; then
 fi
 
 # Create the user
-useradd -m "$username"
+useradd -m "$username" --shell "/bin/bash"
+# Add the user to the sudo group
+sudo usermod -aG sudo "$username"
 
 # Prompt for password
 read -sp "Enter password: " password

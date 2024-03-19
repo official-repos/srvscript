@@ -30,7 +30,7 @@ sudo apt install phpmyadmin -y
 
 # Define the old and new URI
 old_uri="phpmyadmin"
-new_uri="newname"
+new_uri="db/php-myadmin"
 dttm=$(date '+%Y%m%d%H%M%S')
 # Backup the original configuration files
 sudo cp /etc/phpmyadmin/apache.conf /etc/phpmyadmin/apache.conf.backup-${dttm}
@@ -62,6 +62,10 @@ echo "Adjusting Firewall"
 sudo ufw allow in "Apache Full"
 sudo ufw reload
 echo "Enabling SSL"
+
+# Enable password authentication in SSH configuration
+sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+sudo systemctl restart sshd
 
 echo "LAMP stack, phpMyAdmin, mod_rewrite, and mod_remoteip installed successfully!"
 

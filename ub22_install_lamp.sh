@@ -67,6 +67,9 @@ echo "Enabling SSL"
 sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 sudo systemctl restart sshd
 
+# Adjust timezone to Asia/Jakarta (20240319)
+sudo ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime -f
+
 echo "LAMP stack, phpMyAdmin, mod_rewrite, and mod_remoteip installed successfully!"
 
 

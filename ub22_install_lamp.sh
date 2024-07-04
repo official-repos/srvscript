@@ -69,6 +69,7 @@ sudo systemctl restart sshd
 
 # Adjust timezone to Asia/Jakarta (20240319)
 sudo ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime -f
+sudo timedatectl set-timezone Asia/Jakarta
 
 echo "LAMP stack, phpMyAdmin, mod_rewrite, and mod_remoteip installed successfully!"
 

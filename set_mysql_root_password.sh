@@ -49,6 +49,12 @@ else
     exit 1
 fi
 
+# set /root/.my.cnf
+echo "[client]
+user=root
+password=${NEWPWD}
+" > /root/.my.cnf
+
 # Your script logic here
 echo "Your mysql new password is: $NEWPWD"
 

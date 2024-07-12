@@ -13,6 +13,7 @@ sudo ./ub22_install_lamp.sh \
 sudo ./create_admin_user.sh \
 sudo ./set_mysql_root_password.sh \
 sudo ./create_vhost.sh \
+sudo nano /etc/crontab
 sudo reboot 
 
 

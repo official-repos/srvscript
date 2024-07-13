@@ -1,0 +1,7 @@
+%sudo	ALL=NOPASSWD:	/usr/bin/rsync
+%sudo	ALL=NOPASSWD:	/usr/bin/mysql
+%sudo	ALL=NOPASSWD:	/usr/bin/mysqldump
+%sudo	ALL=NOPASSWD:	/bin/mkdir
+%sudo	ALL=NOPASSWD:	/bin/tar
+%sudo	ALL=NOPASSWD:	/bin/gz
+%sudo	ALL=NOPASSWD:	/bin/chmod

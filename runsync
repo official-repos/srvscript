@@ -87,15 +87,15 @@ RDST="rsync://${RUSER}@${RSERVER}:${RPORT}/${MYIP}/${DOW}"
 BCKDIR="/backup/mysql"
 rsync ${ROPTS} ${BCKDIR} ${RDST}
 
-# # 3 - rsync /var/www
-# # --------------------------------------------------------------------------
-
-BCKDIR="/var/www"
-rsync ${ROPTS} ${BCKDIR} ${RDST}
-
-# # 4 - rsync /etc
-# # --------------------------------------------------------------------------
+# 3 - rsync /etc
+# --------------------------------------------------------------------------
 
 BCKDIR="/etc"
+rsync ${ROPTS} ${BCKDIR} ${RDST}
+
+# 4 - rsync /var/www
+# --------------------------------------------------------------------------
+
+BCKDIR="/var/www"
 rsync ${ROPTS} ${BCKDIR} ${RDST}
 

@@ -15,7 +15,9 @@ sudo ./ub22_install_lamp.sh \
 sudo ./create_admin_user.sh \
 sudo ./set_mysql_root_password.sh \
 sudo ./create_vhost.sh \
+# Edit crontab for random daily hour 
 sudo nano /etc/crontab \
+sudo cp runsync /etc/cron.daily/ \
 sudo reboot 
 
 

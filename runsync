@@ -3,7 +3,9 @@ RUN=0
 DOW=$(date +%u)
 # echo ${DOW}
 
-if [ -f "/usr/bin/wine" ]; then export WINEARCH=win32; fi
+# if [ -f "/usr/bin/wine" ]; then export WINEARCH=win32; fi
+# Door knocking by icmp ping to 8.8.8.8
+ping 8.8.8.8
 
 if [ $DOW == 2 ]; then RUN=1; fi
 if [ $DOW == 4 ]; then RUN=1; fi

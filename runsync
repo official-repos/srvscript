@@ -5,13 +5,16 @@ DOW=$(date +%u)
 
 # if [ -f "/usr/bin/wine" ]; then export WINEARCH=win32; fi
 # Door knocking by icmp ping to 8.8.8.8
-ping -c2 8.8.8.8
+ping -c1 8.8.8.8 > /dev/null
 
 if [ $DOW == 2 ]; then RUN=1; fi
 if [ $DOW == 4 ]; then RUN=1; fi
-if [ $DOW == 6 ]; then RUN=1; fi 
+if [ $DOW == 6 ]; then RUN=1; fi
 
-if [ $RUN == 0 ] 
+# HAPUS
+RUN=1
+
+if [ $RUN == 0 ]
 then
     echo "Exit"
     exit
@@ -48,10 +51,23 @@ logger "mysql_backup :: start ------------------"
 
 # Check whether the directory already exists. If not, create it
 if [ ! -d "$BACKUP_DIR" ]; then
-        sudo mkdir -p $BACKUP_DIR
+    sudo mkdir -p $BACKUP_DIR
 fi
 sudo chmod o+w ${BACKUP_DIR}
 cd $BACKUP_DIR
+
+# Check if /backup/backuplist.txt exists
+# Check for the file that gets created when the script successfully finishes.
+INFILE=/backup/backuplist.txt
+if ! [ -e ${INFILE} ]
+then
+    echo "/backup/mysql" | sudo tee ${INFILE}
+    sudo chmod og+w ${INFILE}
+    echo "/etc" >> ${INFILE}
+    echo "/var/www" >> ${INFILE}
+fi
+
+logger "mysql_backup :: begin --------------------------------- "
 
 # Get all databases
 databases=`sudo mysql --defaults-file=/root/.my.cnf -u $MYSQL_USER -e "SHOW DATABASES;" | grep -Ev "(Database|information_schema|performance_schema|test)"`
@@ -61,43 +77,41 @@ databases=`sudo mysql --defaults-file=/root/.my.cnf -u $MYSQL_USER -e "SHOW DATA
 
 # Perform Backup for each database
 for db in $databases; do
-
-        logger "Db => ${db}"
-
-        # echo ${db}
-        # # Backup DB
-        FILENAME=$BACKUP_DIR/$db.sql.gz
-        # logger ${FILENAME}
-        # CHECK2="sudo mysqldump --defaults-file=/root/.my.cnf -u $MYSQL_USER -alv -h localhost $db | gzip > $FILENAME"
-        # logger "${CHECK2}"
-
-        sudo mysqldump --defaults-file=/root/.my.cnf -u $MYSQL_USER -alv -h localhost $db | gzip > $FILENAME
-
-        # Adjust permissions
-        # chmod og= $FILENAME
-
+    
+    logger "Db => ${db}"
+    
+    # echo ${db}
+    # # Backup DB
+    FILENAME=$BACKUP_DIR/$db.sql.gz
+    # logger ${FILENAME}
+    # CHECK2="sudo mysqldump --defaults-file=/root/.my.cnf -u $MYSQL_USER -alv -h localhost $db | gzip > $FILENAME"
+    # logger "${CHECK2}"
+    
+    sudo mysqldump --defaults-file=/root/.my.cnf -u $MYSQL_USER -alv -h localhost $db | gzip > $FILENAME
+    
+    # Adjust permissions
+    # chmod og= $FILENAME
+    
 done
 
-logger "mysql_backup :: end ------------------"
+logger "mysql_backup :: end --------------------------------- "
+
 
 ROPTS="-chavzP --stats"
 RDST="rsync://${RUSER}@${RSERVER}:${RPORT}/${MYIP}/${DOW}"
 
-# 2 - rsync /backup/mysql
+# Iterate over each backup target
 # --------------------------------------------------------------------------
 
-BCKDIR="/backup/mysql"
-rsync ${ROPTS} ${BCKDIR} ${RDST}
-
-# 3 - rsync /etc
-# --------------------------------------------------------------------------
-
-BCKDIR="/etc"
-rsync ${ROPTS} ${BCKDIR} ${RDST}
-
-# 4 - rsync /var/www
-# --------------------------------------------------------------------------
-
-BCKDIR="/var/www"
-rsync ${ROPTS} ${BCKDIR} ${RDST}
-
+cat ${INFILE} | while read line || [[ -n $line ]];
+do
+    # do something with $line here
+    line=${line//[[:blank:]]/}
+    if [ -n "${line}" ]; then
+        # echo $line
+        BCKDIR=$line
+        # echo "rsync ${ROPTS} ${BCKDIR} ${RDST}"
+        # Pls remember this script is executed by root, uid=0
+        rsync ${ROPTS} ${BCKDIR} ${RDST}
+    fi
+done

@@ -47,7 +47,7 @@ BACKUP_DIR=/backup/mysql
 MYSQL_USER=root
 
 # Do backups
-logger "mysql_backup :: start ------------------"
+# logger "mysql_backup :: start ------------------"
 
 # Check whether the directory already exists. If not, create it
 if [ ! -d "$BACKUP_DIR" ]; then
@@ -111,7 +111,10 @@ do
         # echo $line
         BCKDIR=$line
         # echo "rsync ${ROPTS} ${BCKDIR} ${RDST}"
+        logger "rsync :: ${BCKDIR} : begin --------------------------------- "
         # Pls remember this script is executed by root, uid=0
         rsync ${ROPTS} ${BCKDIR} ${RDST}
+        logger "rsync :: ${BCKDIR} : end --------------------------------- "
+        
     fi
 done

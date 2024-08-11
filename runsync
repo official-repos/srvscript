@@ -13,11 +13,11 @@ if [ $DOW == 6 ]; then RUN=1; fi
 
 if [ $RUN == 0 ]
 then
-    echo "Exit"
+    echo "Exit, right now is not the scheduled time ...."
     exit
 fi
 
-echo "Lanjut ..."
+echo "Carry on, backup is now performed..."
 
 RUSER=userku
 export RSYNC_PASSWORD=passwordku

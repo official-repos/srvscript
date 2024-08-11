@@ -11,9 +11,6 @@ if [ $DOW == 2 ]; then RUN=1; fi
 if [ $DOW == 4 ]; then RUN=1; fi
 if [ $DOW == 6 ]; then RUN=1; fi
 
-# HAPUS
-RUN=1
-
 if [ $RUN == 0 ]
 then
     echo "Exit"
@@ -118,3 +115,4 @@ do
         
     fi
 done
+

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-clear
+#clear
 #git pull
 
 echo -n "Enter FQDN: "

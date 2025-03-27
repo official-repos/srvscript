@@ -29,7 +29,7 @@ fi
 
 echo "Since mysql root password is empty, let set the password now."
 
-echo "Please enter new password:"
+echo "Please enter new password for root (mysql):"
 read NEWPWD
 
 # Check if input is empty

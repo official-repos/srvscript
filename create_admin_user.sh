@@ -7,7 +7,7 @@ if [ "$(id -u)" -ne "0" ]; then
 fi
 
 # Prompt for username
-read -p "Enter username: " username
+read -p "Enter username (Linux User): " username
 
 # Check if the user already exists
 if id "$username" &>/dev/null; then

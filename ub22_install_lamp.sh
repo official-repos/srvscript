@@ -73,4 +73,5 @@ sudo timedatectl set-timezone Asia/Jakarta
 
 echo "LAMP stack, phpMyAdmin, mod_rewrite, and mod_remoteip installed successfully!"
 
-
+# 20250826, install prometheus-node-exporter, wazuh
+sudo apt install prometheus-node-exporter

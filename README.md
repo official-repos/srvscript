@@ -12,6 +12,7 @@ git clone https://github.com/official-repos/srvscript \
 cd srvscript \
 sudo cp ./files/sudoers.d/97-localadmin /etc/sudoers.d/ \
 sudo ./ub22_install_lamp.sh \
+sudo ./ufw.sh \
 sudo ./create_admin_user.sh \
 sudo ./set_mysql_root_password.sh \
 sudo ./create_vhost.sh \

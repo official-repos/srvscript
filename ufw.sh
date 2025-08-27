@@ -43,7 +43,8 @@ sudo ufw allow 9100/tcp comment 'node_exporter (open)'
 #    Agent -> Manager (keluar): 1514/udp (events), 1515/tcp (enrollment)
 #    Secara default UFW mengizinkan OUTGOING, tapi berikut eksplisit:
 # =========================================================
-sudo ufw allow out to "$WAZUH_MANAGER" port 1514 proto udp comment 'Wazuh agent events -> manager'
+# sudo ufw allow out to "$WAZUH_MANAGER" port 1514 proto udp comment 'Wazuh agent events -> manager'
+sudo ufw allow out to "$WAZUH_MANAGER" port 1514 proto tcp comment 'Wazuh agent events -> manager'
 sudo ufw allow out to "$WAZUH_MANAGER" port 1515 proto tcp comment 'Wazuh agent enroll -> manager'
 
 # Jika mesin INI adalah Wazuh Manager (bukan agent), buka inbound (opsional):
